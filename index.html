@@ -822,8 +822,16 @@
 </div>
 
 <script>
+    // Helper function to get local date in YYYY-MM-DD format
+    function getLocalDateString(date = new Date()) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     // State management
-    let currentDate = new Date().toISOString().split('T')[0];
+    let currentDate = getLocalDateString();
     const subjects = ['maths', 'english', 'reasoning', 'gs'];
     const subjectNames = {
         'maths': 'Maths',
@@ -884,7 +892,7 @@
     }
 
     function goToToday() {
-        currentDate = new Date().toISOString().split('T')[0];
+        currentDate = getLocalDateString();
         document.getElementById('datePicker').value = currentDate;
         loadDate();
     }
@@ -986,7 +994,7 @@
     }
 
     function goToTodayMock() {
-        const today = new Date().toISOString().split('T')[0];
+        const today = getLocalDateString();
         document.getElementById('mockDatePicker').value = today;
         loadMockTests();
     }
